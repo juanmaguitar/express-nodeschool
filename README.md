@@ -1,22 +1,10 @@
-# Static Server (2/8)
+# Static Server w/ Jade (3/8)
 
-This exercise is about serving static assets like HTML files.
-There are many ways to do it, but we want you to apply static middleware to serve the file index.html.
+Create an Express.js app with a home page rendered by the Jade template engine.
 
-Please don't use ANY routes like app.get. ONLY static.
+The home page should respond to `/home`
 
-Your solution must listen on the port number supplied by `process.argv[2]` 
+The view should show the current date using `new Date.toDateString()`.
 
-The index.html file is provided and usable via the path supplied by
-`process.argv[3]`. However, you can use your own file with this content (beware of whitespace):
-
-    <html>
-      <head>
-        <title>expressworks</title>
-        <link rel="stylesheet" type="text/css" href="/main.css"/>
-      </head>
-      <body>
-        <p>I am red!</p>
-      </body>
-    </html>
-
+We use `toDateString() to simply return the date in a human-readable format
+without the time.
