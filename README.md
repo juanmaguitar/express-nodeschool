@@ -1,21 +1,13 @@
-# Params (encrypted) w/ Express (6/8)
+# Queries w/ Express (7/8)
 
-This exercise is about using URL parameters.
-For example, if you have `/message/526aa677a8ceb64569c9d4fb`, then you should know how to extract that value which is an ID of the message.
+Oftentimes, we need to process the data from the URL query string (urlencoded).
 
-Create an Express.js server that processes PUT `/message/:id` requests
-and produces a SHA-1 hash of the current date combined with the ID from the URL.
+Write a route that extracts data from the query string in the GET `/search` URL
+route, e.g. `?results=recent&include_tabs=true` and then outputs it back to
+the user in JSON format.
 
-For instance, if the server receives
+Use `app.get('/search', function(){...})`` for the route.
 
-    PUT /message/526aa677a8ceb64569c9d4fb
+In Express.js, to extract query string parameters, we can use (inside the request handler):
 
-it will respond with a hash of the current date (as a string) and the ID.
-
-The SHA-1 can be computed like this:
-
-    require('crypto')
-      .createHash('sha1')
-      .update(new Date().toDateString() + id)
-      .digest('hex')
-
+    req.query.NAME
