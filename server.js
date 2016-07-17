@@ -1,22 +1,24 @@
 var express = require('express')
-var stylus = require('stylus');
 var path = require('path');
+var crypto = require('crypto');
 
 var port = process.argv[2] || 3000;
-var srcFolder = process.argv[3] || path.join(__dirname, 'src');
 
 var app = express();
 
-app.set('views', srcFolder )
-app.set('view engine', 'jade')
-
-app.use( stylus.middleware(srcFolder) )
-app.use( express.static(srcFolder) )
-
-app.get('/', function (req, res) {
-  res.render('index',
-  	{ title : 'Home' }
-  )
+app.param('ID', function (req, res, next, id) {
+  req.id = getDecryptedId(id);
+  next()
 })
+
+app.put('/message/:ID', function(req, res){
+	res.end(req.id)
+});
+
+function getDecryptedId (id) {
+	return crypto.createHash('sha1')
+		.update(new Date().toDateString() + id)
+		.digest('hex')
+}
 
 app.listen(port)
